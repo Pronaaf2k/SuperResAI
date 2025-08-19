@@ -1,0 +1,24 @@
+# requirements.txt (Corrected for Jupyter and TensorFlow compatibility)
+
+# Core ML/DL Framework
+tensorflow==2.12.0
+
+# Numerical and Data Handling
+numpy==1.23.5
+
+# Image Processing
+opencv-python-headless==4.7.0.72
+Pillow==9.5.0
+
+# Data Splitting and Utilities
+scikit-learn==1.2.2
+
+# Plotting and Visualization
+matplotlib==3.7.1
+
+# Jupyter environment (let pip resolve the best versions)
+notebook
+ipykernel
+
+# Utility for progress bars
+tqdm==4.66.1

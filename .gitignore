@@ -1,0 +1,38 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# IDE and Editor Folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build and Distribution
+build/
+dist/
+*.egg-info/
+
+# Datasets - these are generated and can be large
+data/
+original_images/
+
+# Saved Models
+models/
+*.h5
+*.keras
+
+# Notebook Checkpoints
+.ipynb_checkpoints
+
+# OS-specific
+.DS_Store
+Thumbs.db
