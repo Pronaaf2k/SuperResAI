@@ -22,7 +22,6 @@ dist/
 *.egg-info/
 
 # Datasets - these are generated and can be large
-data/
 original_images/
 
 # Saved Models
