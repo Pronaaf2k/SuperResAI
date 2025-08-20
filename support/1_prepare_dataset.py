@@ -5,23 +5,15 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
-# --- Configuration (Robust Path Logic) ---
-
-# Get the directory where this script is located (e.g., /path/to/SuperResAI/support)
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
-# Get the project's root directory by going one level up from the script's directory
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir))
 
-# Define the data directories based on the project root
 ORIGINAL_IMAGES_DIR = os.path.join(PROJECT_ROOT, "data", "raw")
 PROCESSED_DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
-# Target image dimensions
 HR_SIZE = (256, 256)
 LR_SIZE = (64, 64)
-
-# --- Main Script ---
 
 def create_dir(path):
     """Creates a directory if it does not exist."""
@@ -72,12 +64,11 @@ def main():
 
     print(f"Found {len(all_image_paths)} total images.")
 
-    # 60% train, 20% validation, 20% test split
     train_val_paths, test_paths = train_test_split(
         all_image_paths, test_size=0.2, random_state=42
     )
     train_paths, val_paths = train_test_split(
-        train_val_paths, test_size=0.25, random_state=42 # 0.25 * 0.8 = 0.2
+        train_val_paths, test_size=0.25, random_state=42
     )
 
     print(f"Dataset split:")
