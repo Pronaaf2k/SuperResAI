@@ -1,68 +1,148 @@
 <div align="center">
-  
-# SuperRes AI: Image Super-Resolution using Machine Learning
+
+# SuperRes AI: 4x Image Super-Resolution with Deep Residual Networks
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**SuperRes AI** is a machine learning-based system developed for the **CSE445 Machine Learning** course at **North South University**. The project focuses on restoring high-quality images from significantly degraded ones using machine learning models trained on real image data.
+**SuperRes AI** is a deep learning project developed for the **CSE445 Machine Learning** course at **North South University**. The project implements a powerful super-resolution model to restore high-resolution (256x256) images from low-resolution (64x64) inputs, achieving a 4x upscale factor.
+
 </div>
 
 ---
+
 <div align="center">
-  
+
 ## 📌 Project Overview
-</div>
-The aim of this project is to develop a **Super-Resolution Image Enhancement System** using **deep learning**, where low-resolution images are restored to near-original quality through model inference. 
-
-This is accomplished by:
-- **Collecting and degrading images**
-- **Training a super-resolution model**
-- **Evaluating with metrics like PSNR and SSIM**
-- **Generating side-by-side comparisons for visual verification**
-
----
-<div align="center">
-  
-## 🔍 Key Features
 
 </div>
 
-- **Low-Resolution Simulation**: Original images are degraded through blurring and downsampling.
-- **Image Super-Resolution**: A deep learning model learns to reconstruct high-resolution images.
-- **Model Flexibility**: Supports switching between baseline (SRCNN) and advanced models (e.g., ESPCN).
-- **Performance Evaluation**: Automated calculation of PSNR, SSIM, and visual results.
+The core objective of this project is to build and train an **EDSR-like (Enhanced Deep Super-Resolution)** model capable of intelligently reconstructing high-frequency details lost during image degradation. Unlike traditional algorithms like Bicubic interpolation, our model learns from a dataset of image pairs to produce visually superior and more accurate results.
 
----
-<div align="center">
-  
-## 🧠 Technologies Used
-
-</div>
-
-### Machine Learning Frameworks
-- **PyTorch** or **TensorFlow** (configurable)
-- **OpenCV / Pillow** for image processing
-- **NumPy**, **Matplotlib**, **Scikit-learn**
-
-### Development Tools
-- Python 3.8+
-- Git & GitHub for version control
-- Jupyter Notebooks for result visualization
+The system features an automated data preparation pipeline, a robust deep learning model, and a comprehensive evaluation framework for both quantitative and qualitative assessment.
 
 ---
 
 <div align="center">
-  
-## Team Members
 
-| Student ID   | Name                        |
-|--------------|-----------------------------|
-| 2132882642   | Atique Shahrier Chaklader  |
-| 2212779042   | Samiyeel Alim Binaaf        |
-| 2022122042   | Md. Mubtasim Fuad           |
-| 2212626042   | Tamjid Islam                |
+## 🚀 Key Features
 
-**Faculty Supervisor**: Mohammad Shifat-E-Rabbi  
-**Department**: Department of Electrical and Computer Engineering  
-**University**: North South University
 </div>
+
+- **Automated Data Pipeline**: A standalone Python script (`1_prepare_dataset.py`) automates the entire data preparation process. It takes raw high-resolution images, creates a 60/20/20 train-validation-test split, and generates the corresponding low-resolution (64x64) and high-resolution (256x256) pairs.
+- **EDSR-like Architecture**: Implements a powerful deep learning model inspired by the EDSR paper, utilizing a series of residual blocks to enable deep feature learning and stable training.
+- **Efficient Upsampling**: Uses two sub-pixel convolution layers (`tf.nn.depth_to_space`) for efficient and high-quality 4x upsampling, minimizing checkerboard artifacts common in other methods.
+- **Comprehensive Evaluation**: The model's performance is evaluated both quantitatively using the **PSNR (Peak Signal-to-Noise Ratio)** metric and qualitatively through side-by-side visual comparisons against the Bicubic baseline.
+- **Data Augmentation**: To improve model generalization and performance on a limited dataset, the training pipeline automatically applies random horizontal flips and rotations to the training images.
+
+---
+
+<div align="center">
+
+## 🧠 Technology Stack
+
+</div>
+
+- **Machine Learning Framework**: **TensorFlow / Keras**
+- **Image Processing**: OpenCV, Pillow
+- **Data Handling & Visualization**: NumPy, Matplotlib
+- **Data Splitting**: Scikit-learn
+- **Development Environment**: Python 3.10, Jupyter Notebook
+
+---
+
+<div align="center">
+
+## 📂 Project Structure
+
+</div>
+
+The project is organized into a clean and modular structure for clarity and ease of use.
+
+```
+
+SuperResAI/
+├── .gitignore
+├── SuperResolutionAnalysis.ipynb
+├── data/
+│   ├── raw/  # Place your original 1024x1024 images here
+│   ├── train/  # Auto-generated by the script
+│   ├── val/  # Auto-generated by the script
+│   └── test/  # Auto-generated by the script
+├── support/
+│   ├── 1\_prepare\_dataset.py
+│   └── requirements.txt
+└── ... (conda environment folder)
+
+````
+
+---
+
+<div align="center">
+
+## ⚙️ Setup and Usage
+
+</div>
+
+Follow these steps to set up the environment and run the project.
+
+**1. Clone the Repository**
+```bash
+git clone <your-repository-url>
+cd SuperResAI
+````
+
+**2. Create and Activate Conda Environment**
+We recommend using Conda to manage dependencies. This project is built and tested with Python 3.10.
+
+```bash
+# Create a new environment named 'superres'
+conda create --name superres python=3.10 -y
+
+# Activate the environment
+conda activate superres
+```
+
+**3. Install Dependencies**
+The required packages are listed in the `requirements.txt` file.
+
+```bash
+pip install -r support/requirements.txt
+```
+
+**4. Add Original Images**
+Place your high-resolution (e.g., 1024x1024) images inside the `data/raw/` directory.
+
+**5. Run the Data Preparation Script**
+Execute the script from the project's root directory. This will populate the train, val, and test folders.
+
+```bash
+python support/1_prepare_dataset.py
+```
+
+**6. Launch Jupyter Notebook and Train**
+Start the Jupyter server from the project's root directory.
+
+```bash
+jupyter notebook
+```
+
+Open the `SuperResolutionAnalysis.ipynb` notebook. If prompted, select the `superres` kernel. You can now run all the cells to train the model, evaluate its performance, and see the visual results. For best results, let the model train for 150+ epochs.
+
+---
+
+<div align="center">
+
+## 👥 Team Members
+
+</div>
+
+| Student ID | Name                      |
+| ---------- | ------------------------- |
+| 2132882642 | Atique Shahrier Chaklader |
+| 2212779042 | Samiyeel Alim Binaaf      |
+| 2022122042 | Md. Mubtasim Fuad         |
+| 2212626042 | Tamjid Islam              |
+
+Faculty Supervisor: Mohammad Shifat-E-Rabbi
+Department: Department of Electrical and Computer Engineering
+University: North South University
